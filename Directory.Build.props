@@ -1,7 +1,8 @@
 <Project>
 
   <PropertyGroup>
-    <OrleansPackageVersion Condition=" '$(OrleansPackageVersion)'=='' ">2.0*</OrleansPackageVersion>
+    <OrleansPackageVersion>2.3.*</OrleansPackageVersion>
+    <AspNetCorePackageVersion>2.1.*</AspNetCorePackageVersion>
   </PropertyGroup>
 
 </Project>

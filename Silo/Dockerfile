@@ -1,18 +1,19 @@
-FROM microsoft/aspnetcore:2.0 AS base
+FROM mcr.microsoft.com/dotnet/core/runtime:2.1 AS base
 WORKDIR /app
 
-FROM microsoft/aspnetcore-build:2.0 AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:2.1 AS build
 WORKDIR /src
-COPY *.sln ./
+COPY GrainInterfaces/GrainInterfaces.csproj GrainInterfaces/
+COPY Grains/Grains.csproj Grains/
 COPY Silo/Silo.csproj Silo/
 COPY Directory.Build.props .
-RUN dotnet restore
+RUN dotnet restore Silo/Silo.csproj
 COPY . .
 WORKDIR /src/Silo
-RUN dotnet build -c Release -o /app
+RUN dotnet build --no-restore -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish -c Release -o /app
+RUN dotnet publish --no-restore -c Release -o /app
 
 FROM base AS final
 WORKDIR /app

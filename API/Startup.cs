@@ -45,8 +45,7 @@ namespace API
         {
             var log = serviceProvider.GetService<ILogger<Startup>>();
 
-            // TODO replace with your connection string
-            const string connectionString = "YOUR_CONNECTION_STRING_HERE";
+            var connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
             var client = new ClientBuilder()
                 .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IValueGrain).Assembly))
                 .Configure<ClusterOptions>(options =>

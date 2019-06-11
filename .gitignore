@@ -247,6 +247,8 @@ ServiceFabricBackup/
 *.ldf
 *.ndf
 
+.env
+
 # Business Intelligence projects
 *.rdl.data
 *.bim.layout

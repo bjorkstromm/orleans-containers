@@ -6,8 +6,12 @@ services:
     build:
       context: .
       dockerfile: API/Dockerfile
+    environment:
+      - AZURE_STORAGE_CONNECTION_STRING
   silo:
     image: silo
     build:
       context: .
       dockerfile: Silo/Dockerfile
+    environment:
+      - AZURE_STORAGE_CONNECTION_STRING

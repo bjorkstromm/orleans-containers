@@ -17,8 +17,7 @@ namespace Silo
 
         static void Main(string[] args)
         {
-            // TODO replace with your connection string
-            const string connectionString = "YOUR_CONNECTION_STRING_HERE";
+            var connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
             silo = new SiloHostBuilder()
                 .Configure<ClusterOptions>(options =>
                 {
