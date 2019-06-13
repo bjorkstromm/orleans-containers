@@ -45,7 +45,9 @@ namespace API
         {
             var log = serviceProvider.GetService<ILogger<Startup>>();
 
-            var connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
+            // Due to bug: https://github.com/Azure/service-fabric-mesh-preview/issues/264
+            var connectionString = Uri.UnescapeDataString(Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING"));
+
             var client = new ClientBuilder()
                 .ConfigureApplicationParts(parts => parts.AddApplicationPart(typeof(IValueGrain).Assembly))
                 .Configure<ClusterOptions>(options =>

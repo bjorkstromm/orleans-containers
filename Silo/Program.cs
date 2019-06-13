@@ -17,7 +17,8 @@ namespace Silo
 
         static void Main(string[] args)
         {
-            var connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
+            // Due to bug: https://github.com/Azure/service-fabric-mesh-preview/issues/264
+            var connectionString = Uri.UnescapeDataString(Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING"));
             silo = new SiloHostBuilder()
                 .Configure<ClusterOptions>(options =>
                 {
